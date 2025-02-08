@@ -17,10 +17,9 @@ class AzureOpenAIClient:
 
     Attributes:
         client (AzureChatOpenAI): An instance of the AzureChatOpenAI client.
-        system_prompt (str): The system prompt to be prepended to each call.
     """
 
-    def __init__(self, system_prompt: str):
+    def __init__(self):
         """
         Initialize the Azure OpenAI client with the provided system prompt.
 
@@ -30,7 +29,6 @@ class AzureOpenAIClient:
         self.client: AzureChatOpenAI = self._get_openai_client(
             api_settings.azure_openai
         )
-        self.system_prompt = system_prompt
 
     def __call__(self, prompt: str) -> str:
         """
@@ -43,7 +41,7 @@ class AzureOpenAIClient:
             str: The API response content after stripping any leading/trailing whitespace.
         """
         messages: List = [
-            SystemMessage(content=self.system_prompt),
+            SystemMessage(content=api_settings.azure_openai.system_prompt),
             HumanMessage(content=prompt),
         ]
 

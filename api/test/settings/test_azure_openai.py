@@ -17,6 +17,7 @@ class TestAzureOpenAI:
         assert settings.endpoint == "test_openai_endpoint"
         assert settings.temperature == 0.7
         assert settings.max_tokens == 50
+        assert settings.system_prompt == "test_system_prompt"
 
     def test_settings_immutability(self) -> None:
         """Ensure settings are immutable after creation."""

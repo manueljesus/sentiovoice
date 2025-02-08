@@ -35,4 +35,9 @@ class AzureOpenAI(BaseSettings):
         description="Azure OpenAI max tokens",
     )
 
+    system_prompt: str = Field(
+        alias=AliasChoices("AZURE_OPENAI_SYSTEM_PROMPT"),
+        description="Azure OpenAI system prompt",
+    )
+
     model_config = SettingsConfigDict(env_file=".env", frozen=True, extra="ignore")

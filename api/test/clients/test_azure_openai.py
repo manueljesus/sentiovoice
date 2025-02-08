@@ -29,7 +29,7 @@ class TestAzureOpenAIClient:
         """Fixture to create an instance of AzureOpenAIClient with a mock."""
         mock_instance = mock_azure_chat_openai.return_value
         mock_instance.invoke.return_value = AIMessage(content="Mock response")
-        return AzureOpenAIClient(system_prompt="Test system prompt")
+        return AzureOpenAIClient()
 
     def test_successful_response(
         self,
