@@ -6,8 +6,9 @@ import pytest
 from azure.ai.textanalytics import AnalyzeSentimentResult, DocumentError
 from azure.core.exceptions import HttpResponseError, ClientAuthenticationError
 
+from src.clients import azure_text_analytics_client
 from src.clients.client_errors import AzureTextAnalyticsClientError
-from src.clients import AzureTextAnalyticsClient
+from src.clients.azure_text_analytics import AzureTextAnalyticsClient
 
 
 class TestAzureTextAnalyticsClient:
@@ -120,3 +121,10 @@ class TestAzureTextAnalyticsClient:
             text_analytics_client.analyze_sentiment("I love coding!")
 
         mock_logger.assert_called_once()
+
+    def test_singleton_instance(
+        self
+    ):
+        """Test that the module-initialized AzureTextAnalyticsClient is a singleton."""
+
+        assert azure_text_analytics_client is azure_text_analytics_client

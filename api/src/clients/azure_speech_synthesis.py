@@ -69,3 +69,6 @@ class AzureSpeechSynthesisClient:
         )
 
         return speech_config
+
+
+azure_speech_synthesis_client = AzureSpeechSynthesisClient()

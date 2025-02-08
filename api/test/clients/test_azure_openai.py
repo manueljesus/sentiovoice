@@ -3,8 +3,10 @@ import logging
 from typing import Generator
 from unittest.mock import MagicMock, patch
 from langchain.schema import AIMessage
+
+from src.clients import azure_openai_client
 from src.clients.client_errors import AzureOpenAIClientError
-from src.clients import AzureOpenAIClient
+from src.clients.azure_openai import AzureOpenAIClient
 
 
 class TestAzureOpenAIClient:
@@ -60,3 +62,10 @@ class TestAzureOpenAIClient:
             azure_openai_client("Test prompt")
 
         mock_logger.assert_called_once_with("LLM response generation failed: API Error")
+
+    def test_singleton_instance(
+        self
+    ):
+        """Test that the module-initialized AzureOpenAIClient is a singleton."""
+
+        assert azure_openai_client is azure_openai_client

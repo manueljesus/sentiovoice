@@ -67,3 +67,6 @@ class AzureTextAnalyticsClient:
             endpoint=settings.endpoint,
             credential=AzureKeyCredential(settings.api_key)
         )
+
+
+azure_text_analytics_client = AzureTextAnalyticsClient()

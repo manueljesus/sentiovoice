@@ -73,3 +73,6 @@ class AzureOpenAIClient:
             temperature=settings.temperature,
             max_tokens=settings.max_tokens,
         )
+
+
+azure_openai_client = AzureOpenAIClient()

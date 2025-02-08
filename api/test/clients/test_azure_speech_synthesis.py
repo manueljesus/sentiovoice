@@ -5,7 +5,8 @@ from unittest.mock import MagicMock, patch
 import pytest
 from azure.cognitiveservices.speech import SpeechSynthesisResult, ResultReason
 
-from src.clients import AzureSpeechSynthesisClient
+from src.clients import azure_speech_synthesis_client
+from src.clients.azure_speech_synthesis import AzureSpeechSynthesisClient
 from src.clients.client_errors import AzureSpeechSynthesisClientError
 
 
@@ -84,3 +85,10 @@ class TestAzureSpeechSynthesisClient:
             speech_synthesis_client("Hello")
 
         mock_logger.assert_called_once_with("Speech synthesis failed")
+
+    def test_singleton_instance(
+        self
+    ):
+        """Test that the module-initialized AzureSpeechSynthesisClient is a singleton."""
+
+        assert azure_speech_synthesis_client is azure_speech_synthesis_client

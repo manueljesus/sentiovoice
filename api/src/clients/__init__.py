@@ -1,3 +1,3 @@
-from .azure_openai import AzureOpenAIClient
-from .azure_text_analytics import AzureTextAnalyticsClient
-from .azure_speech_synthesis import AzureSpeechSynthesisClient
+from .azure_openai import azure_openai_client
+from .azure_text_analytics import azure_text_analytics_client
+from .azure_speech_synthesis import azure_speech_synthesis_client
