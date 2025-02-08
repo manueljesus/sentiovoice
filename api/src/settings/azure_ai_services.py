@@ -11,4 +11,8 @@ class AzureAIServices(BaseSettings):
         alias=AliasChoices("AZURE_AI_SERVICES_ENDPOINT"), description="Azure AI Services endpoint"
     )
 
+    region: str = Field(
+        alias=AliasChoices("AZURE_AI_SERVICES_REGION"), description="Azure AI Services region"
+    )
+
     model_config = SettingsConfigDict(env_file=".env", frozen=True, extra="ignore")
