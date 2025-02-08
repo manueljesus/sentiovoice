@@ -2,7 +2,11 @@ import logging
 
 from typing import List
 
-from azure.ai.textanalytics import TextAnalyticsClient, AnalyzeSentimentResult, DocumentError
+from azure.ai.textanalytics import (
+    TextAnalyticsClient,
+    AnalyzeSentimentResult,
+    DocumentError
+)
 from azure.core.credentials import AzureKeyCredential
 
 from src import api_settings
@@ -10,6 +14,7 @@ from src.settings.azure_ai_services import AzureAIServices
 from src.clients.client_errors import AzureTextAnalyticsClientError
 
 logger = logging.getLogger(__name__)
+
 
 class AzureTextAnalyticsClient:
     """
@@ -20,9 +25,7 @@ class AzureTextAnalyticsClient:
     """
 
     def __init__(self):
-        self.client = self._get_text_analytics_client(
-            api_settings.azure_ai_services
-        )
+        self.client = self._get_text_analytics_client(api_settings.azure_ai_services)
 
     def analyze_sentiment(self, text: str) -> str:
         """
@@ -35,7 +38,9 @@ class AzureTextAnalyticsClient:
             str: The sentiment of the text
         """
         try:
-            response: List[AnalyzeSentimentResult | DocumentError] = self.client.analyze_sentiment(documents=[text])
+            response: List[AnalyzeSentimentResult | DocumentError] = (
+                self.client.analyze_sentiment(documents=[text])
+            )
         except Exception as e:
             error = f"Text Analytics API error: {e}"
             logger.error(error)
@@ -53,7 +58,9 @@ class AzureTextAnalyticsClient:
             logger.error(error)
             raise AzureTextAnalyticsClientError(error)
 
-    def _get_text_analytics_client(self, settings: AzureAIServices) -> TextAnalyticsClient:
+    def _get_text_analytics_client(
+        self, settings: AzureAIServices
+    ) -> TextAnalyticsClient:
         """
         Get the Azure Text Analytics client.
 
@@ -64,8 +71,7 @@ class AzureTextAnalyticsClient:
             TextAnalyticsClient: Azure Text Analytics client
         """
         return TextAnalyticsClient(
-            endpoint=settings.endpoint,
-            credential=AzureKeyCredential(settings.api_key)
+            endpoint=settings.endpoint, credential=AzureKeyCredential(settings.api_key)
         )
 
 
