@@ -86,9 +86,7 @@ class TestAzureSpeechSynthesisClient:
 
         mock_logger.assert_called_once_with("Speech synthesis failed")
 
-    def test_singleton_instance(
-        self
-    ):
+    def test_singleton_instance(self):
         """Test that the module-initialized AzureSpeechSynthesisClient is a singleton."""
 
         assert azure_speech_synthesis_client is azure_speech_synthesis_client

@@ -63,9 +63,7 @@ class TestAzureOpenAIClient:
 
         mock_logger.assert_called_once_with("LLM response generation failed: API Error")
 
-    def test_singleton_instance(
-        self
-    ):
+    def test_singleton_instance(self):
         """Test that the module-initialized AzureOpenAIClient is a singleton."""
 
         assert azure_openai_client is azure_openai_client
