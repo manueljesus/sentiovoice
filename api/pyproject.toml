@@ -12,6 +12,8 @@ package-mode = false
 python = "^3.11"
 azure-functions = "^1.21.3"
 fastapi = "^0.115.8"
+langchain = {extras = ["openai"], version = "^0.3.18"}
+langchain-openai = "^0.3.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
