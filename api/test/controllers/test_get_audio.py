@@ -42,11 +42,12 @@ class TestDownloadAudio:
     ):
         filename = "test.mp3"
         response = client.get(f"/audio/{filename}")
+        path = f"test_audio_path/{filename}"
 
         assert response.status_code == status.HTTP_200_OK
-        mock_file_exists.assert_called_once_with(filename)
+        mock_file_exists.assert_called_once_with(path)
         mock_file_response.assert_called_once_with(
-            path=filename, media_type="audio/mpeg", filename=filename
+            path=path, media_type="audio/mpeg", filename=filename
         )
 
     def test_download_audio_file_not_found(self, client: TestClient):
