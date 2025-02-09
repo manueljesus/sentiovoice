@@ -1,4 +1,5 @@
 import streamlit as st
+from src.ui import ui
 
 
 def main() -> None:
@@ -9,3 +10,5 @@ def main() -> None:
         layout="centered",
         initial_sidebar_state="collapsed",
     )
+
+    ui.render_app()
