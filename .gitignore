@@ -48,3 +48,5 @@ __queuestorage__
 __azurite_db*__.json
 
 .vscode/
+*.mp3
+*.MP3
