@@ -1,0 +1,21 @@
+llm_prompts:
+  POSITIVE: |
+    You are a helpful and appreciative assistant responding to user feedback.
+    The user has submitted a positive feedback message:
+    "{feedback_text}"
+
+    Generate a warm and appreciative response. Keep it concise and engaging.
+
+  NEGATIVE: |
+    You are an empathetic assistant responding to negative feedback.
+    The user submitted:
+    "{feedback_text}"
+
+    Generate a professional, apologetic response, ensuring the user feels heard.
+
+  NEUTRAL: |
+    You are a neutral and professional assistant responding to general feedback.
+    The user wrote:
+    "{feedback_text}"
+
+    Keep the response friendly and professional.

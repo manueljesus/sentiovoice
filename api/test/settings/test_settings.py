@@ -13,6 +13,7 @@ class TestSettings:
         settings = Settings()
         assert isinstance(settings.azure_openai, AzureOpenAI)
         assert isinstance(settings.azure_ai_services, AzureAIServices)
+        assert settings.prompt == "test_prompt_file"
 
     def test_settings_immutability(self) -> None:
         """Ensure settings are immutable after creation."""
