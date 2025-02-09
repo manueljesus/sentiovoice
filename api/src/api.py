@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
+from src.controllers.post_feedback import router as post_feedback
+
 api = FastAPI(
     title="SentioVoice API",
     description="An API for sentiment analysis, LLM response generation, and speech synthesis.",
@@ -19,3 +21,6 @@ def root():
     """
 
     return RedirectResponse(url="/docs")
+
+
+api.include_router(post_feedback)
