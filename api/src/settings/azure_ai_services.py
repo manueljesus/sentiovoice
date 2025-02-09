@@ -18,4 +18,10 @@ class AzureAIServices(BaseSettings):
         description="Azure AI Services region",
     )
 
+    audio_path: str = Field(
+        alias=AliasChoices("AZURE_AI_SERVICES_AUDIO_PATH"),
+        description="Azure AI Services audio path",
+        default="audio"
+    )
+
     model_config = SettingsConfigDict(env_file=".env", frozen=True, extra="ignore")

@@ -13,6 +13,7 @@ class TestAzureAIServices:
         assert settings.api_key == "test_ai_services_api_key"
         assert settings.endpoint == "test_ai_services_endpoint"
         assert settings.region == "test_ai_services_region"
+        assert settings.audio_path == "test_audio_path"
 
     def test_settings_immutability(self) -> None:
         """Ensure settings are immutable after creation."""

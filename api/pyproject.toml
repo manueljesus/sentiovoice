@@ -44,5 +44,6 @@ env = [
     "AZURE_AI_SERVICES_API_KEY=test_ai_services_api_key",
     "AZURE_AI_SERVICES_ENDPOINT=test_ai_services_endpoint",
     "AZURE_AI_SERVICES_REGION=test_ai_services_region",
+    "AZURE_AI_SERVICES_AUDIO_PATH=test_audio_path",
     "PROMPT_FILE=test_prompt_file"
 ]
