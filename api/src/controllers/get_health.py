@@ -8,7 +8,13 @@ from src.dtos import HealthResponse
 router = APIRouter(prefix="/health", tags=["health"])
 
 
-@router.get("/", response_model=HealthResponse)
+@router.get(
+    "/",
+    summary="Health check",
+    description="Checks the health of all Azure services clients.",
+    response_description="The health status of all Azure services clients.",
+    response_model=HealthResponse
+)
 def health_check():
     health_response = HealthResponse(
         azure_open_ai_client=_check_azure_openai_client(),
