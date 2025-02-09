@@ -1,3 +1,4 @@
+import os
 import logging
 from typing import Generator
 from unittest.mock import MagicMock, patch
@@ -28,6 +29,14 @@ class TestAzureSpeechSynthesisClient:
             yield mock_log_error
 
     @pytest.fixture
+    def mock_os_path_join(self) -> Generator[MagicMock, None, None]:
+        """Fixture to mock os.path.join."""
+        with patch(
+            "os.path.join", side_effect=lambda *args: "/".join(args)
+        ) as mock_join:
+            yield mock_join
+
+    @pytest.fixture
     def speech_synthesis_client(
         self, mock_speech_synthesizer: MagicMock
     ) -> AzureSpeechSynthesisClient:
@@ -39,6 +48,7 @@ class TestAzureSpeechSynthesisClient:
         speech_synthesis_client: AzureSpeechSynthesisClient,
         mock_speech_synthesizer: MagicMock,
         mock_logger: MagicMock,
+        mock_os_path_join: MagicMock,
     ):
         """Test successful speech synthesis."""
         mock_result = MagicMock(spec=SpeechSynthesisResult)
@@ -49,6 +59,7 @@ class TestAzureSpeechSynthesisClient:
 
         assert filename.endswith(".mp3")
         mock_logger.assert_not_called()
+        mock_os_path_join.assert_called_once()
 
     def test_speech_synthesis_api_failure(
         self,
