@@ -1,3 +1,4 @@
+import os
 import logging
 from uuid_extensions import uuid7str
 
@@ -29,10 +30,15 @@ class AzureSpeechSynthesisClient:
         self.config = self._get_speech_config(api_settings.azure_ai_services)
 
     def __call__(self, text: str) -> str:
+        audio_path = api_settings.azure_ai_services.audio_path
+
+        os.makedirs(audio_path, exist_ok=True)
+
         filename = f"{uuid7str()}.mp3"
+        file_path = os.path.join(audio_path, filename)
 
         synthesizer = SpeechSynthesizer(
-            speech_config=self.config, audio_config=AudioConfig(filename=filename)
+            speech_config=self.config, audio_config=AudioConfig(filename=file_path)
         )
 
         try:
