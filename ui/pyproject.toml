@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "SentioVoice"
+version = "0.1.0"
+description = "SentioVoice API"
+authors = [
+    "Manuel Jesús Escamilla <manueljesus@mjescamilla.com>"
+]
+license = "MIT"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.42.0"
+requests = "^2.32.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+pytest-env = "^1.1.5"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
