@@ -12,6 +12,8 @@ package-mode = false
 python = "^3.11"
 streamlit = "^1.42.0"
 requests = "^2.32.0"
+pydantic = "^2.10.6"
+pydantic-settings = "^2.7.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
@@ -21,3 +23,9 @@ pytest-env = "^1.1.5"
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+env = [
+    "API_URL=test_api_url",
+    "AUDIO_PATH=test_audio_path"
+]
