@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
 from src.controllers.post_feedback import router as post_feedback
+from src.controllers.get_audio import router as get_audio
 
 api = FastAPI(
     title="SentioVoice API",
@@ -24,3 +25,5 @@ def root():
 
 
 api.include_router(post_feedback)
+
+api.include_router(get_audio)
