@@ -55,7 +55,7 @@ class Audio():
 
         if os.path.exists(audio_path):
             with open(audio_path, "rb") as audio_file:
-                st.audio(audio_file.read(), format="audio/mp3")
+                st.audio(audio_file.read(), format="audio/mpeg")
         else:
             st.error("Audio file not found.")
 

@@ -94,9 +94,9 @@ class TestAudio:
     ):
         """Test that play plays an existing file."""
         with patch("builtins.open", new_callable=MagicMock) as mock_open:
-            mock_open.return_value.read.return_value = b"audio_data"
+            mock_open.return_value.__enter__.return_value.read.return_value = b"audio_data"
             audio.play("test_audio.mp3")
-            mock_streamlit_audio.assert_called_once()
+            mock_streamlit_audio.assert_called_once_with(b"audio_data", format="audio/mpeg")
 
     def test_play_failure(
         self,
