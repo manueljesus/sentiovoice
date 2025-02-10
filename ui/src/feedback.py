@@ -73,7 +73,7 @@ class Feedback():
                 text-align: center;
                 font-weight: bold;
             ">
-                {sentiment.capitalize()} feedback.
+                {sentiment.capitalize()} feedback
             </div>
             """,
             unsafe_allow_html=True
