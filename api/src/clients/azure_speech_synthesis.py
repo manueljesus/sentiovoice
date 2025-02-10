@@ -28,8 +28,13 @@ class AzureSpeechSynthesisClient:
 
     def __init__(self):
         self.config = self._get_speech_config(api_settings.azure_ai_services)
+        self.voices = {
+            "POSITIVE": "excited",
+            "NEUTRAL": "default",
+            "NEGATIVE": "empathetic"
+        }
 
-    def __call__(self, text: str) -> str:
+    def __call__(self, text: str, sentiment: str = "NEUTRAL") -> str:
         audio_path = api_settings.azure_ai_services.audio_path
 
         os.makedirs(audio_path, exist_ok=True)
@@ -41,8 +46,13 @@ class AzureSpeechSynthesisClient:
             speech_config=self.config, audio_config=AudioConfig(filename=file_path)
         )
 
+        ssml = self._generate_ssml(
+            text,
+            self.voices.get(sentiment.upper(), self.voices["NEUTRAL"])
+        )
+
         try:
-            result: SpeechSynthesisResult = synthesizer.speak_text(text)
+            result: SpeechSynthesisResult = synthesizer.speak_ssml(ssml)
         except Exception as e:
             error = f"Speech synthesis failed: {e}"
             logger.error(error)
@@ -75,6 +85,28 @@ class AzureSpeechSynthesisClient:
         )
 
         return speech_config
+
+    def _generate_ssml(self, text: str, style: str) -> str:
+        """
+        Generate SSML with sentiment styling.
+
+        Args:
+            text (str): The input text.
+            style (str): The voice style to apply.
+
+        Returns:
+            str: SSML string.
+        """
+        ssml_template = f"""
+        <speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'>
+            <voice name='en-US-AriaNeural'>
+                <mstts:express-as style='{style}'>
+                    {text}
+                </mstts:express-as>
+            </voice>
+        </speak>
+        """
+        return ssml_template.strip()
 
 
 azure_speech_synthesis_client = AzureSpeechSynthesisClient()

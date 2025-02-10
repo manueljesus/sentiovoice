@@ -53,7 +53,7 @@ class TestAzureSpeechSynthesisClient:
         """Test successful speech synthesis."""
         mock_result = MagicMock(spec=SpeechSynthesisResult)
         mock_result.reason = ResultReason.SynthesizingAudioCompleted
-        mock_speech_synthesizer.return_value.speak_text.return_value = mock_result
+        mock_speech_synthesizer.return_value.speak_ssml.return_value = mock_result
 
         filename = speech_synthesis_client("Hello")
 
@@ -68,7 +68,7 @@ class TestAzureSpeechSynthesisClient:
         mock_logger: MagicMock,
     ):
         """Test handling when the API call fails."""
-        mock_speech_synthesizer.return_value.speak_text.side_effect = Exception(
+        mock_speech_synthesizer.return_value.speak_ssml.side_effect = Exception(
             "API Error"
         )
 
@@ -88,7 +88,7 @@ class TestAzureSpeechSynthesisClient:
         """Test handling when speech synthesis does not complete successfully."""
         mock_result = MagicMock(spec=SpeechSynthesisResult)
         mock_result.reason = ResultReason.Canceled  # Simulate a failure
-        mock_speech_synthesizer.return_value.speak_text.return_value = mock_result
+        mock_speech_synthesizer.return_value.speak_ssml.return_value = mock_result
 
         with pytest.raises(
             AzureSpeechSynthesisClientError, match="Speech synthesis failed"

@@ -13,7 +13,7 @@ class GenerateFeedbackResponse:
         feedback_response = azure_openai_client(
             Prompt()(sentiment, feedback.feedback)
         )
-        audio_file = azure_speech_synthesis_client(feedback_response)
+        audio_file = azure_speech_synthesis_client(feedback_response, sentiment)
 
         return SentimentResponse(
             feedback=feedback.feedback,
