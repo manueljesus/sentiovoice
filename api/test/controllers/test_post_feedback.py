@@ -74,4 +74,4 @@ class TestFeedbackEndpoint:
         mock_prompt.assert_called_once()
         mock_prompt.return_value.assert_called_once_with("positive", "I love SentioVoice!")
         mock_openai_client.assert_called_once_with("Generated prompt")
-        mock_speech_synthesis_client.assert_called_once_with("Thank you!")
+        mock_speech_synthesis_client.assert_called_once_with("Thank you!", "positive")
