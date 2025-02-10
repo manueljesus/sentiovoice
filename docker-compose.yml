@@ -1,0 +1,28 @@
+services:
+  api:
+    container_name: sentiovoice-api
+    build:
+      context: api
+      dockerfile: Dockerfile
+    ports:
+      - "7071:80"
+    env_file:
+      - api/.env
+    networks:
+      - sentiovoice-network
+
+  streamlit:
+    container_name: sentiovoice-ui
+    build:
+      context: ui
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    env_file:
+      - ui/.env
+    networks:
+      - sentiovoice-network
+
+networks:
+  sentiovoice-network:
+    driver: bridge
