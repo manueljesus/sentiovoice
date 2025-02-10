@@ -54,6 +54,25 @@ class TestAzureTextAnalyticsClient:
         mock_text_analytics_client.return_value.analyze_sentiment.assert_called_once()
         mock_logger.assert_not_called()
 
+    def test_neutral_sentiment_response(
+        self,
+        text_analytics_client: AzureTextAnalyticsClient,
+        mock_text_analytics_client: MagicMock,
+        mock_logger: MagicMock,
+    ):
+        """Test handling of neutral sentiment response."""
+        mock_response = MagicMock(spec=AnalyzeSentimentResult)
+        mock_response.sentiment = "mixed"
+        mock_text_analytics_client.return_value.analyze_sentiment.return_value = [
+            mock_response
+        ]
+
+        sentiment = text_analytics_client.analyze_sentiment("It's okay, I guess.")
+
+        assert sentiment == "NEUTRAL"
+        mock_text_analytics_client.return_value.analyze_sentiment.assert_called_once()
+        mock_logger.assert_not_called()
+
     def test_document_error_response(
         self,
         text_analytics_client: AzureTextAnalyticsClient,

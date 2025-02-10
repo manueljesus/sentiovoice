@@ -52,7 +52,8 @@ class AzureTextAnalyticsClient:
             raise AzureTextAnalyticsClientError(error)
 
         try:
-            return response[0].sentiment.upper()
+            sentiment = response[0].sentiment.upper()
+            return sentiment if sentiment in ("POSITIVE", "NEGATIVE") else "NEUTRAL"
         except Exception as e:
             error = f"Sentiment analysis failed: {e}"
             logger.error(error)
